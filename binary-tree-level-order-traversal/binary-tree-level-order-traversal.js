@@ -11,25 +11,21 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    let currentLevel = []
+    let q = [root]
     let result = []
-    if (root) {
-        currentLevel.push(root)
-    }
-    while (currentLevel.length) {
-        let current = []
-        let len = currentLevel.length
+    
+    if (!root) return []
+    
+    while(q.length) {
+        let len = q.length
+        let sameLevel = []
         for (let i=0; i<len; i++) {
-            let node = currentLevel.shift()
-            current.push(node.val)
-            if (node.left) {
-                currentLevel.push(node.left)
-            }
-            if (node.right) {
-                currentLevel.push(node.right)
-            }
+            let curr = q.shift()
+            sameLevel.push(curr.val)
+            if (curr.left) q.push(curr.left)
+            if (curr.right) q.push(curr.right)
         }
-        result.push(current)
+        result.push(sameLevel)
     }
     return result
 };

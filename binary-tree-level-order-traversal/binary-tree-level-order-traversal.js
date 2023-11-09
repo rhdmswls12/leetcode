@@ -14,18 +14,19 @@ var levelOrder = function(root) {
     let q = [root]
     let result = []
     
-    if (!root) return []
+    if(!root) return []
     
     while(q.length) {
         let len = q.length
-        let sameLevel = []
+        let group = []
         for (let i=0; i<len; i++) {
-            let curr = q.shift()
-            sameLevel.push(curr.val)
-            if (curr.left) q.push(curr.left)
-            if (curr.right) q.push(curr.right)
+            let cur = q.shift()
+            group.push(cur.val)
+            
+            if (cur.left) q.push(cur.left)
+            if (cur.right) q.push(cur.right)
         }
-        result.push(sameLevel)
+        result.push(group)
     }
     return result
 };

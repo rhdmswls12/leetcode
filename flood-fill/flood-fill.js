@@ -10,19 +10,16 @@ var floodFill = function(image, sr, sc, newColor) {
     
     if (oldColor === newColor) return image
     
-    const dfs = (x, y, oldColor, newColor) => {
-        
-        if (x<0 || x>=image.length || y<0 || y>=image[0].length || image[x][y] !== oldColor) return
-    
-        image[x][y] = newColor
-        
-        dfs(x+1, y, oldColor, newColor)
-        dfs(x, y+1, oldColor, newColor)
-        dfs(x-1, y, oldColor, newColor)
-        dfs(x, y-1, oldColor, newColor)
+    function dfs(x, y) {
+        if (x<0 || x>=image.length || y<0 || y>=image[0].length) return
+        if (image[x][y] === oldColor) {
+            image[x][y] = newColor
+            dfs(x+1, y)
+            dfs(x, y+1)
+            dfs(x-1, y)
+            dfs(x, y-1)
+        }
     }
-    
-    dfs(sr, sc, oldColor, newColor)
+    dfs(sr, sc)
     return image
 };
-

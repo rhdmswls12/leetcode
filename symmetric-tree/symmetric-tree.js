@@ -11,9 +11,6 @@
  * @return {boolean}
  */
 var isSymmetric = function(root) {
-    
-    if (!root) return true
-    
     function dfs(left, right) {
         if (!left && !right) return true
         if ((!left && right) || (left && !right)) return false

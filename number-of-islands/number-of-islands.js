@@ -3,26 +3,23 @@
  * @return {number}
  */
 var numIslands = function(grid) {
-    let count = 0
+    let answer = 0
     
     function dfs(x, y) {
-        if (x<0 || x>=grid.length || y<0 || y>=grid[0].length) {
-            return false
-        }
+        if (x<0 || x>=grid.length || y<0 || y>=grid[0].length) return false
         if (grid[x][y] === '1') {
             grid[x][y] = '0'
             dfs(x+1, y)
             dfs(x, y+1)
             dfs(x-1, y)
-            dfs(x, y-1)
+            dfs(x, y-1)  
             return true
-        }
-        return false
+        } 
     }
-    for (let i=0; i<grid.length; i++) {
+    for(let i=0; i<grid.length; i++) {
         for (let j=0; j<grid[0].length; j++) {
-            if (dfs(i,j)) count++
+            if (dfs(i,j)) answer++
         }
     }
-    return count
+    return answer
 };

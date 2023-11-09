@@ -3,36 +3,22 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    let array = []
-    let newArray = []
     let stack = []
-    array = s.split('')
-    
-    array.forEach(a => {
-        if (a === '(') newArray.push(-1)
-        if (a === ')') newArray.push(1)
-        if (a === '{') newArray.push(-2)
-        if (a === '}') newArray.push(2)
-        if (a === '[') newArray.push(-3)
-        if (a === ']') newArray.push(3)
-    })
-    
-    const sum = newArray.reduce((acc, cur) => (acc + cur), 0)
-    
-    if (sum) return false
-    
-    newArray.forEach(a => {
-        
-        if ((stack[stack.length-1]*(-1) === a) && (stack[stack.length-1] < 0) ) {
+    let parentheses = s.split('')
+    let object = {
+        '(': -1,
+        ')': 1,
+        '{': -2,
+        '}': 2,
+        '[': -3,
+        ']': 3
+    }
+    parentheses.forEach(parenthese => {
+        if ((stack[stack.length-1] < 0) && (object[parenthese] + stack[stack.length-1] === 0)) {
             stack.pop()
         } else {
-            stack.push(a)
+            stack.push(object[parenthese])
         }
     })
-    console.log(stack)
-    if (stack.length) {
-        return false
-    } else {
-        return true
-    }
+    return stack.length ? false : true
 };
